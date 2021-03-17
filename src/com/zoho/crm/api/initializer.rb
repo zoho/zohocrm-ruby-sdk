@@ -79,8 +79,9 @@ class Initializer
       raise SDKException.new(Constants::INITIALIZATION_ERROR, Constants::RESOURCE_PATH_ERROR_MESSAGE, nil, nil)
     end
 
-    log = SDKLog::Log.initialize(Levels::INFO, File.join(Dir.pwd, Constants::LOGFILE_NAME)) if log.nil?
-
+    log = SDKLog::Log.initialize(Levels::INFO, File.join(Dir.pwd, Constants::LOGFILE_NAME)) if log.nil? 
+    log = SDKLog::Log.initialize(Levels::OFF, nil) if log.level == 'OFF'
+    
     SDKLog::SDKLogger.initialize(log)
 
     @@initializer = Initializer.new

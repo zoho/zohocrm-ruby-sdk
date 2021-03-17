@@ -18,12 +18,12 @@ module SDKLog
   class SDKLogger
     @@path = nil
     @@level = nil
-    @@log_levels_precedence = { 'SEVERE' => 1, 'ERROR' => 2, 'WARN' => 3, 'INFO' => 4, 'ALL' => 5 }
+    @@log_levels_precedence = { 'FATAL' => 1,'SEVERE' => 1, 'ERROR' => 2, 'WARN' => 3, 'INFO' => 4, 'ALL' => 5,'DEBUG' => 5 ,'OFF' => 5}
     @@logger = nil
 
     def self.initialize(log)
-      File.new(log.path, 'w') unless File.exist? log.path
-      sdk_logger = WEBrick::BasicLog.new(log.path, 5)
+      File.new(log.path, 'w') unless File.exist? log.path if log.path != nil
+      sdk_logger = WEBrick::BasicLog.new(log.path, @@log_levels_precedence[log.level])
       @@logger = sdk_logger
     rescue StandardError => e
       raise SDKException.new(nil, Constants::SDK_LOGGER_INITIALIZE, nil, e)
@@ -46,6 +46,7 @@ module SDKLog
     end
 
     def self.severe(message, exception = nil)
+     
       message = message + exception.to_s + exception.backtrace.join("\n") unless exception.nil?
       @@logger&.fatal(Time.new.to_s + ' ' + message)
     end
@@ -59,4 +60,6 @@ module Levels
   ERROR = 'ERROR'
   DEBUG = 'DEBUG'
   ALL = 'ALL'
+  OFF = 'OFF'
+  FATAL = 'FATAL'
 end
