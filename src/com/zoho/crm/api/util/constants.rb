@@ -493,10 +493,18 @@ class Constants
   HOST_ERROR_MESSAGE = 'Host MUST NOT be null.'
 
   PORT_ERROR_MESSAGE = 'Port MUST NOT be null.'
+	
+	USERSIGNATURE_ERROR_MESSAGE = "UserSignature MUST NOT be null."
+	
+	ENVIRONMENT_ERROR_MESSAGE = "Environment MUST NOT be null."
+	
+	SDK_CONFIG_ERROR_MESSAGE = "sdkConfig MUST NOT be null."
+
+  TOKEN_ERROR_MESSAGE = "Token MUST NOT be null."
+	
+	STORE_ERROR_MESSAGE = "Store MUST NOT be null."
 
   INITIALIZATION_EXCEPTION = 'Exception in initialization'
-
-  SWITCH_USER_EXCEPTION = 'Exception in Switch user'
 
   SWITCH_USER_ERROR = "SWITCH USER ERROR"
 

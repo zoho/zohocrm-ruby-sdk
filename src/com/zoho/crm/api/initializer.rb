@@ -27,7 +27,7 @@ class Initializer
 
       error[Constants::ERROR_HASH_EXPECTED_TYPE] = UserSignature
 
-      raise SDKException.new(Constants::INITIALIZATION_ERROR, Constants::INITIALIZATION_EXCEPTION, error, nil)
+      raise SDKException.new(Constants::INITIALIZATION_ERROR, Constants::USERSIGNATURE_ERROR_MESSAGE, error, nil)
 
     end
 
@@ -38,7 +38,7 @@ class Initializer
 
       error[Constants::ERROR_HASH_EXPECTED_TYPE] = DC::DataCenter::Environment
 
-      raise SDKException.new(Constants::INITIALIZATION_ERROR, Constants::INITIALIZATION_EXCEPTION, error, nil)
+      raise SDKException.new(Constants::INITIALIZATION_ERROR, Constants::ENVIRONMENT_ERROR_MESSAGE, error, nil)
 
     end
 
@@ -49,7 +49,7 @@ class Initializer
 
       error[Constants::ERROR_HASH_EXPECTED_TYPE] = Authenticator::Token
 
-      raise SDKException.new(Constants::INITIALIZATION_ERROR, Constants::INITIALIZATION_EXCEPTION, error, nil)
+      raise SDKException.new(Constants::INITIALIZATION_ERROR, Constants::TOKEN_ERROR_MESSAGE, error, nil)
 
     end
 
@@ -60,7 +60,7 @@ class Initializer
 
       error[Constants::ERROR_HASH_EXPECTED_TYPE] = Store::TokenStore
 
-      raise SDKException.new(Constants::INITIALIZATION_ERROR, Constants::INITIALIZATION_EXCEPTION, error, nil)
+      raise SDKException.new(Constants::INITIALIZATION_ERROR, Constants::STORE_ERROR_MESSAGE, error, nil)
 
     end
 
@@ -71,7 +71,7 @@ class Initializer
 
       error[Constants::ERROR_HASH_EXPECTED_TYPE] = SDKConfig
 
-      raise SDKException.new(Constants::INITIALIZATION_ERROR, Constants::INITIALIZATION_EXCEPTION, error, nil)
+      raise SDKException.new(Constants::INITIALIZATION_ERROR, Constants::SDK_CONFIG_ERROR_MESSAGE, error, nil)
 
     end
 
@@ -80,7 +80,6 @@ class Initializer
     end
 
     log = SDKLog::Log.initialize(Levels::INFO, File.join(Dir.pwd, Constants::LOGFILE_NAME)) if log.nil? 
-    log = SDKLog::Log.initialize(Levels::OFF, nil) if log.level == 'OFF'
     
     SDKLog::SDKLogger.initialize(log)
 
@@ -129,7 +128,7 @@ class Initializer
 
       error[Constants::ERROR_HASH_EXPECTED_TYPE] = UserSignature
 
-      raise SDKException.new(Constants::SWITCH_USER_ERROR, Constants::SWITCH_USER_EXCEPTION, error, nil)
+      raise SDKException.new(Constants::SWITCH_USER_ERROR, Constants::USERSIGNATURE_ERROR_MESSAGE, error, nil)
 
     end
 
@@ -140,7 +139,7 @@ class Initializer
 
       error[Constants::ERROR_HASH_EXPECTED_TYPE] = DC::DataCenter::Environment
 
-      raise SDKException.new(Constants::SWITCH_USER_ERROR, Constants::SWITCH_USER_EXCEPTION, error, nil)
+      raise SDKException.new(Constants::SWITCH_USER_ERROR, Constants::ENVIRONMENT_ERROR_MESSAGE, error, nil)
 
     end
 
@@ -151,7 +150,7 @@ class Initializer
 
       error[Constants::ERROR_HASH_EXPECTED_TYPE] = Authenticator::Token
 
-      raise SDKException.new(Constants::SWITCH_USER_ERROR, Constants::SWITCH_USER_EXCEPTION, error, nil)
+      raise SDKException.new(Constants::SWITCH_USER_ERROR, Constants::TOKEN_ERROR_MESSAGE, error, nil)
 
     end
 
@@ -162,7 +161,7 @@ class Initializer
 
       error[Constants::ERROR_HASH_EXPECTED_TYPE] = SDKConfig
 
-      raise SDKException.new(Constants::SWITCH_USER_ERROR, Constants::SWITCH_USER_EXCEPTION, error, nil)
+      raise SDKException.new(Constants::SWITCH_USER_ERROR, Constants::SDK_CONFIG_ERROR_MESSAGE, error, nil)
 
     end
 
