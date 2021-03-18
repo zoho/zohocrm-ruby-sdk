@@ -498,6 +498,8 @@ class Constants
 
   SWITCH_USER_EXCEPTION = 'Exception in Switch user'
 
+  SWITCH_USER_ERROR = "SWITCH USER ERROR"
+
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
   EMAIL = 'email'
