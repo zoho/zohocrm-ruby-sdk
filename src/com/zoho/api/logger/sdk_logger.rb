@@ -25,14 +25,10 @@ module SDKLog
       if(log.level != Levels::OFF) && !log.path.nil? && log.path.length > 0 
         File.new(log.path, 'w') unless File.exist? log.path if log.path != nil
         sdk_logger = WEBrick::BasicLog.new(log.path, @@log_levels_precedence[log.level])
-      end
-
-      if !log.level.nil?
+      elsif !log.level.nil? and log.level == Levels::OFF
         sdk_logger = WEBrick::BasicLog.new(nil, @@log_levels_precedence[log.level])
       end
-
       @@logger = sdk_logger
-
     rescue StandardError => e
       raise SDKException.new(nil, Constants::SDK_LOGGER_INITIALIZE, nil, e)
     end
