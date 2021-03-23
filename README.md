@@ -24,7 +24,7 @@ Since Zoho CRM APIs are authenticated with OAuth2 standards, you should register
 
 ## Environmental Setup
 
-RUBY SDK requires Ruby (version 2.5 and above) to be set up in your development environment.
+RUBY SDK requires Ruby (version 2.6 and above) to be set up in your development environment.
 
 ## Including the SDK in your project
 
