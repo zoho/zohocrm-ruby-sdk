@@ -137,7 +137,7 @@ tokenstore = FileStore.new("/Users/user_name/Documents/ruby_sdk_token.txt")
 To use Custom Persistence, the user must extend **Store::TokenStore** and include the methods.
 
 ```ruby
-require 'zohocrm_ruby_sdk'
+require 'ZCRMSDK'
 # This class stores the user token details to the file.
   class TokenStore
     # This method is used to get the user token details.
@@ -279,7 +279,7 @@ Before you get started with creating your Ruby application, you need to register
 Initialize the SDK using the following code.
 
 ```ruby
-require 'zohocrm_ruby_sdk'
+require 'ZCRMSDK'
 
 class Initialize
     def self.initialize() 
@@ -499,7 +499,7 @@ Initializer.switch_user(user, environment, token, sdk_config, proxy)
 Here is a sample code to depict multi-threading for a multi-user app.
 
 ```ruby
-require 'zohocrm_ruby_sdk'
+require 'ZCRMSDK'
 module MultiUser
     class MultiThreading
         def initialize(module_api_name)
@@ -554,7 +554,7 @@ MultiUser::MultiThreading.new(module_api_name).execute(user_signature, environme
 ### Multi-threading in a Single User App
 
 ```ruby
-require 'zohocrm_ruby_sdk'
+require 'ZCRMSDK'
 module SingleUser
     class MultiThreading
 
@@ -593,7 +593,7 @@ SingleUser::MultiThreading.new.execute(user_signature, environment, token,tokens
 
 
 ```ruby
-require 'zohocrm_ruby_sdk'
+require 'ZCRMSDK'
 require 'date'
 class Records
   def get_records
