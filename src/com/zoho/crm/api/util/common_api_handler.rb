@@ -88,6 +88,7 @@ module Handler
       converter_instance = nil
 
       if !@content_type.nil? && (Constants::IS_GENERATE_REQUEST_BODY.include? http_method) 
+
         request = nil
 
         begin

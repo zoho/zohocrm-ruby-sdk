@@ -26,6 +26,7 @@ Since Zoho CRM APIs are authenticated with OAuth2 standards, you should register
 
 RUBY SDK requires Ruby (version 2.6 and above) to be set up in your development environment.
 
+
 ## Including the SDK in your project
 
 Ruby SDK is available through Gem . You can download the gem using:
@@ -260,7 +261,7 @@ Before you get started with creating your Ruby application, you need to register
      # 
 
     sdk_config = SDKConfig::Builder.new.auto_refresh_fields(false).pick_list_validation(true).open_timeout(60).read_timeout(60).write_timeout(60).keep_alive_timeout(2).build
-    ```
+
 
 - The path containing the absolute directory path to store user-specific files containing module fields information.
 
@@ -500,6 +501,7 @@ Here is a sample code to depict multi-threading for a multi-user app.
 
 ```ruby
 require 'ZCRMSDK'
+
 module MultiUser
     class MultiThreading
         def initialize(module_api_name)
@@ -555,6 +557,7 @@ MultiUser::MultiThreading.new(module_api_name).execute(user_signature, environme
 
 ```ruby
 require 'ZCRMSDK'
+
 module SingleUser
     class MultiThreading
 
@@ -594,6 +597,7 @@ SingleUser::MultiThreading.new.execute(user_signature, environment, token,tokens
 
 ```ruby
 require 'ZCRMSDK'
+
 require 'date'
 class Records
   def get_records
@@ -655,6 +659,7 @@ class Records
     # 
 
      sdk_config = SDKConfig::Builder.new.auto_refresh_fields(false).pick_list_validation(true).open_timeout(60).read_timeout(60).write_timeout(60).keep_alive_timeout(2).build
+
 
     resource_path = "/Users/user_name/Documents/rubysdk-application"
     # Create an instance of RequestProxy class that takes the following parameters

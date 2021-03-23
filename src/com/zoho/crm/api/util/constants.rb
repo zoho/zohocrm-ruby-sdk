@@ -116,6 +116,7 @@ class Constants
 
   PHOTO_SUPPORTED_MODULES = ["leads", "contacts", "accounts", "products", "vendors"]
 
+
   PARAMETER_NULL_ERROR = 'NULL PARAMETER ERROR'
 
   HEADER_NULL_ERROR = 'NULL HEADER ERROR'
@@ -233,6 +234,7 @@ class Constants
   PHOTO_UPLOAD_ERROR_MESSAGE  = "The given module is not supported in API.";
     
   INVALID_MODULE  = "INVALID_MODULE"
+
 
   INVENTORY_MODULES = %w[invoices sales_orders purchase_orders quotes]
 
@@ -507,6 +509,7 @@ class Constants
   INITIALIZATION_EXCEPTION = 'Exception in initialization'
 
   SWITCH_USER_ERROR = "SWITCH USER ERROR"
+
 
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 

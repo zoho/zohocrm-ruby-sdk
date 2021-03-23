@@ -80,7 +80,7 @@ class Initializer
     end
 
     log = SDKLog::Log.initialize(Levels::INFO, File.join(Dir.pwd, Constants::LOGFILE_NAME)) if log.nil? 
-    
+
     SDKLog::SDKLogger.initialize(log)
 
     @@initializer = Initializer.new

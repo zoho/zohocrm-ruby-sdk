@@ -49,6 +49,7 @@ module Util
       http = nil
       initializer = Initializer.get_initializer
       request_proxy = initializer.request_proxy
+
       if request_proxy.nil?
         http = Net::HTTP.new(url.host, url.port)
       else
@@ -69,6 +70,7 @@ module Util
       http.read_timeout = initializer.sdk_config.read_timeout
       http.write_timeout = initializer.sdk_config.write_timeout
       http.keep_alive_timeout = initializer.sdk_config.keep_alive_timeout
+
 
       if @request_method == Constants::REQUEST_METHOD_GET
         req = Net::HTTP::Get.new(url.request_uri)

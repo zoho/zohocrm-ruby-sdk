@@ -118,6 +118,7 @@ module Util
 
           error[Constants::GIVEN_VALUE] = value
 
+
           error[Constants::ERROR_HASH_FIELD] = member_name
 
           error[Constants::ACCEPTED_VALUES] = key_details[Constants::VALUES]

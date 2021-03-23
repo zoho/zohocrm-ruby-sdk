@@ -50,6 +50,7 @@ module Util
           end
         end
       end
+
       package_name = Utility.path_to_package(class_path)
       class_details = Initializer.json_details[package_name]
       request_hash = {}

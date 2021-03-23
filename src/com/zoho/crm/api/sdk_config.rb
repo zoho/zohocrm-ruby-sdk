@@ -59,7 +59,7 @@ class SDKConfig
   def pick_list_validation
     @pick_list_validation
   end
-
+  
   def open_timeout
     @open_timeout   
   end
