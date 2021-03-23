@@ -22,12 +22,16 @@ module Util
 
     @@apitype_vs_structurename = {}
 
+    @@api_supported_module ={}
+
     @@new_file = false
 
     @@get_modified_modules = false
 
     @@force_refresh = false
-
+    def self.api_supported_module
+      @@api_supported_module
+    end
     def self.get_fields(module_api_name)
       require_relative '../initializer'
       initializer = Initializer.get_initializer
@@ -86,9 +90,12 @@ module Util
           elsif initializer.sdk_config.auto_refresh_fields
             @@new_file = true
             fill_data_type
-            module_api_names = get_modules(nil)
+            if @@api_supported_module.length == 0
+              @@api_supported_module = get_modules_api_names(nil)
+            end
+           
             record_field_details_json = { Constants::FIELDS_LAST_MODIFIED_TIME => get_current_time_in_millis }
-            module_api_names.each do |module_name|
+            @@api_supported_module.each_key do |module_name|
               unless record_field_details_json.key? module_name.downcase
                 record_field_details_json[module_name.downcase] = {}
                 File.open(record_field_details_path, 'w') do |f|
@@ -164,7 +171,7 @@ module Util
     end
 
     def self.modify_fields(record_field_details_path, modified_time)
-      modified_modules = get_modules(modified_time)
+      modified_modules = get_modules_api_names(modified_time)
       record_field_details_json = JSON.parse(File.open(record_field_details_path).read)
       record_field_details_json[Constants::FIELDS_LAST_MODIFIED_TIME] = get_current_time_in_millis
       File.open(record_field_details_path, 'w') do |f|
@@ -172,7 +179,7 @@ module Util
       end
       return unless modified_modules.any?
 
-      modified_modules.each do |module_api_name|
+      modified_modules.each_key do |module_api_name|
         if record_field_details_json.key? module_api_name.downcase
           delete_fields(record_field_details_json, module_api_name)
         end
@@ -181,7 +188,7 @@ module Util
       File.open(record_field_details_path, 'w') do |f|
         f.write(record_field_details_json.to_json)
       end
-      modified_modules.each do |module_api_name|
+      modified_modules.each_key do |module_api_name|
         get_fields(module_api_name)
       end
     end
@@ -554,8 +561,13 @@ module Util
       field_detail[Constants::NAME] = key_name
     end
 
-    def self.get_modules(header)
-      api_names = []
+    def self.get_modules
+      @@sync_lock.synchronize do
+        @@api_supported_module = get_modules_api_names(nil)
+      end
+    end
+    def self.get_modules_api_names(header)
+      api_names = {}
       header_map = HeaderMap.new
       unless header.nil?
         header_value = Time.at(header.to_i / 1000).iso8601
@@ -573,7 +585,7 @@ module Util
           if response_object.is_a? Modules::ResponseWrapper
             modules = response_object.modules
             modules.each do |module_ins|
-              api_names.push(module_ins.api_name) if module_ins.api_supported
+              api_names[module_ins.api_name.downcase] = module_ins.generated_type.value if module_ins.api_supported
             end
           elsif response_object.is_a? Modules::APIException
             error_response = {}

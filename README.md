@@ -24,15 +24,16 @@ Since Zoho CRM APIs are authenticated with OAuth2 standards, you should register
 
 ## Environmental Setup
 
-RUBY SDK requires Ruby (version 2.5 and above) to be set up in your development environment.
+RUBY SDK requires Ruby (version 2.6 and above) to be set up in your development environment.
+
 
 ## Including the SDK in your project
 
 Ruby SDK is available through Gem . You can download the gem using:
-`gem install zohocrm-ruby-sdk` 
+`gem install ZCRMSDK` 
 
 You can include the SDK to your project using:
-`require 'zohocrm_ruby_sdk'`
+`require 'ZCRMSDK'`
 
 
 ## Token Persistence
@@ -137,7 +138,7 @@ tokenstore = FileStore.new("/Users/user_name/Documents/ruby_sdk_token.txt")
 To use Custom Persistence, the user must extend **Store::TokenStore** and include the methods.
 
 ```ruby
-require 'zohocrm_ruby_sdk'
+require 'ZCRMSDK'
 # This class stores the user token details to the file.
   class TokenStore
     # This method is used to get the user token details.
@@ -246,9 +247,21 @@ Before you get started with creating your Ruby application, you need to register
      # if true - value for any picklist field will be validated with the available values.
      # if false - value for any picklist field will not be validated, resulting in creation of a new value.
      #
+     # open_timeout
+     # Number of seconds to wait for the connection to open (default 60 seconds)
+     # 
+     # read_timeout
+     # Number of seconds to wait for one block to be read (via one read(2) call) (default 60 seconds)
+     # 
+     # write_timeout
+     # Number of seconds to wait for one block to be written (via one write(2) call) (default 60 seconds)
+     # 
+     # keep_alive_timeout
+     # Seconds to reuse the connection of the previous request(default 2 seconds)
+     # 
 
-    sdk_config = SDKConfig::Builder.new.auto_refresh_fields(false).pick_list_validation(true).build
-    ```
+    sdk_config = SDKConfig::Builder.new.auto_refresh_fields(false).pick_list_validation(true).open_timeout(60).read_timeout(60).write_timeout(60).keep_alive_timeout(2).build
+
 
 - The path containing the absolute directory path to store user-specific files containing module fields information.
 
@@ -267,7 +280,7 @@ Before you get started with creating your Ruby application, you need to register
 Initialize the SDK using the following code.
 
 ```ruby
-require 'zohocrm_ruby_sdk'
+require 'ZCRMSDK'
 
 class Initialize
     def self.initialize() 
@@ -318,8 +331,20 @@ class Initialize
         # if true - value for any picklist field will be validated with the available values.
         # if false - value for any picklist field will not be validated, resulting in creation of a new value.
         #
+        # open_timeout
+        # Number of seconds to wait for the connection to open (default 60 seconds)
+        # 
+        # read_timeout
+        # Number of seconds to wait for one block to be read (via one read(2) call) (default 60 seconds)
+        # 
+        # write_timeout
+        # Number of seconds to wait for one block to be written (via one write(2) call) (default 60 seconds)
+        # 
+        # keep_alive_timeout
+        # Seconds to reuse the connection of the previous request(default 2 seconds)
+        # 
         
-        sdk_config = SDKConfig::Builder.new.auto_refresh_fields(false).pick_list_validation(true).build
+        sdk_config = SDKConfig::Builder.new.auto_refresh_fields(false).pick_list_validation(true).open_timeout(60).read_timeout(60).write_timeout(60).keep_alive_timeout(2).build
 
         resource_path = "/Users/user_name/Documents/rubysdk-application"
         
@@ -475,7 +500,8 @@ Initializer.switch_user(user, environment, token, sdk_config, proxy)
 Here is a sample code to depict multi-threading for a multi-user app.
 
 ```ruby
-require 'zohocrm_ruby_sdk'
+require 'ZCRMSDK'
+
 module MultiUser
     class MultiThreading
         def initialize(module_api_name)
@@ -530,7 +556,8 @@ MultiUser::MultiThreading.new(module_api_name).execute(user_signature, environme
 ### Multi-threading in a Single User App
 
 ```ruby
-require 'zohocrm_ruby_sdk'
+require 'ZCRMSDK'
+
 module SingleUser
     class MultiThreading
 
@@ -569,7 +596,8 @@ SingleUser::MultiThreading.new.execute(user_signature, environment, token,tokens
 
 
 ```ruby
-require 'zohocrm_ruby_sdk'
+require 'ZCRMSDK'
+
 require 'date'
 class Records
   def get_records
@@ -617,8 +645,21 @@ class Records
     # if true - value for any picklist field will be validated with the available values.
     # if false - value for any picklist field will not be validated, resulting in creation of a new value.
     #
+    # open_timeout
+    # Number of seconds to wait for the connection to open (default 60 seconds)
+    # 
+    # read_timeout
+    # Number of seconds to wait for one block to be read (via one read(2) call) (default 60 seconds)
+    # 
+    # write_timeout
+    # Number of seconds to wait for one block to be written (via one write(2) call) (default 60 seconds)
+    # 
+    # keep_alive_timeout
+    # Seconds to reuse the connection of the previous request(default 2 seconds)
+    # 
 
-    sdk_config = SDKConfig::Builder.new.auto_refresh_fields(false).pick_list_validation(true).build
+     sdk_config = SDKConfig::Builder.new.auto_refresh_fields(false).pick_list_validation(true).open_timeout(60).read_timeout(60).write_timeout(60).keep_alive_timeout(2).build
+
 
     resource_path = "/Users/user_name/Documents/rubysdk-application"
     # Create an instance of RequestProxy class that takes the following parameters

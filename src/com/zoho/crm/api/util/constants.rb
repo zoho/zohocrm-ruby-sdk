@@ -100,11 +100,22 @@ class Constants
 
   ZOHO_SDK = 'X-ZOHO-SDK'
 
-  SDK_VERSION = '2.0.1'
+  SDK_VERSION = '2.0.0'
 
   SET_TO_CONTENT_TYPE = ['/crm/bulk/v2/read', '/crm/bulk/v2/write']
 
+  IS_GENERATE_REQUEST_BODY =[REQUEST_METHOD_POST,REQUEST_METHOD_PUT,REQUEST_METHOD_PATCH]
+
   REQUIRED_IN_UPDATE = 'required_in_update'
+
+  PHOTO = "photo"
+    
+  CRM = "crm"
+  
+  API_VERSION = "v2"
+
+  PHOTO_SUPPORTED_MODULES = ["leads", "contacts", "accounts", "products", "vendors"]
+
 
   PARAMETER_NULL_ERROR = 'NULL PARAMETER ERROR'
 
@@ -217,6 +228,13 @@ class Constants
   MODULES_TO_SKIP = ['Activities']
 
   ACTIVITIES = 'Activities'
+
+  GIVEN_VALUE = "given-value"
+
+  PHOTO_UPLOAD_ERROR_MESSAGE  = "The given module is not supported in API.";
+    
+  INVALID_MODULE  = "INVALID_MODULE"
+
 
   INVENTORY_MODULES = %w[invoices sales_orders purchase_orders quotes]
 
@@ -477,10 +495,21 @@ class Constants
   HOST_ERROR_MESSAGE = 'Host MUST NOT be null.'
 
   PORT_ERROR_MESSAGE = 'Port MUST NOT be null.'
+	
+	USERSIGNATURE_ERROR_MESSAGE = "UserSignature MUST NOT be null."
+	
+	ENVIRONMENT_ERROR_MESSAGE = "Environment MUST NOT be null."
+	
+	SDK_CONFIG_ERROR_MESSAGE = "sdkConfig MUST NOT be null."
+
+  TOKEN_ERROR_MESSAGE = "Token MUST NOT be null."
+	
+	STORE_ERROR_MESSAGE = "Store MUST NOT be null."
 
   INITIALIZATION_EXCEPTION = 'Exception in initialization'
 
-  SWITCH_USER_EXCEPTION = 'Exception in Switch user'
+  SWITCH_USER_ERROR = "SWITCH USER ERROR"
+
 
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 

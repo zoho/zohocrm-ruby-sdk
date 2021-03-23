@@ -87,7 +87,8 @@ module Handler
 
       converter_instance = nil
 
-      if !@content_type.nil? && ((@http_method == Constants::REQUEST_METHOD_POST) || (@http_method == Constants::REQUEST_METHOD_PUT) || (@http_method == Constants::REQUEST_METHOD_PATCH))
+      if !@content_type.nil? && (Constants::IS_GENERATE_REQUEST_BODY.include? http_method) 
+
         request = nil
 
         begin

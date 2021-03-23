@@ -394,6 +394,7 @@ module Record
       handler_instance.content_type = 'multipart/form-data'
       handler_instance.request = request
       handler_instance.mandatory_checker = true
+      Util::Utility.get_modules()
       require_relative 'file_handler'
       handler_instance.api_call(FileHandler.name, 'application/json')
     end
