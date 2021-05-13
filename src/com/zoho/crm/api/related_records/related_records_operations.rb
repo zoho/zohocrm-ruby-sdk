@@ -145,14 +145,18 @@ module RelatedRecords
       # The method to update related record
       # @param related_record_id [Integer] A Integer
       # @param request [BodyWrapper] An instance of BodyWrapper
+      # @param header_instance [HeaderMap] An instance of HeaderMap
       # @return An instance of APIResponse
     # @raise SDKException
-    def update_related_record(related_record_id, request)
+    def update_related_record(related_record_id, request, header_instance=nil)
       if !related_record_id.is_a? Integer
         raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: related_record_id EXPECTED TYPE: Integer', nil, nil)
       end
       if request!=nil and !request.is_a? BodyWrapper
         raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: request EXPECTED TYPE: BodyWrapper', nil, nil)
+      end
+      if header_instance!=nil and !header_instance.is_a? HeaderMap
+        raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: header_instance EXPECTED TYPE: HeaderMap', nil, nil)
       end
       handler_instance = Handler::CommonAPIHandler.new
       api_path = ''
@@ -169,6 +173,7 @@ module RelatedRecords
       handler_instance.category_method = 'UPDATE'
       handler_instance.content_type = 'application/json'
       handler_instance.request = request
+      handler_instance.header = header_instance
       Util::Utility.get_related_lists(@related_list_api_name, @module_api_name, handler_instance)
       require_relative 'action_handler'
       handler_instance.api_call(ActionHandler.name, 'application/json')
@@ -176,11 +181,15 @@ module RelatedRecords
 
       # The method to delink record
       # @param related_record_id [Integer] A Integer
+      # @param header_instance [HeaderMap] An instance of HeaderMap
       # @return An instance of APIResponse
     # @raise SDKException
-    def delink_record(related_record_id)
+    def delink_record(related_record_id, header_instance=nil)
       if !related_record_id.is_a? Integer
         raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: related_record_id EXPECTED TYPE: Integer', nil, nil)
+      end
+      if header_instance!=nil and !header_instance.is_a? HeaderMap
+        raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: header_instance EXPECTED TYPE: HeaderMap', nil, nil)
       end
       handler_instance = Handler::CommonAPIHandler.new
       api_path = ''
@@ -195,6 +204,7 @@ module RelatedRecords
       handler_instance.api_path = api_path
       handler_instance.http_method = Constants::REQUEST_METHOD_DELETE
       handler_instance.category_method = Constants::REQUEST_METHOD_DELETE
+      handler_instance.header = header_instance
       require_relative 'action_handler'
       handler_instance.api_call(ActionHandler.name, 'application/json')
     end
@@ -215,6 +225,10 @@ module RelatedRecords
       def self.If_modified_since
         @@If_modified_since
       end
+      @@X_external = Header.new('X-EXTERNAL', 'com.zoho.crm.api.RelatedRecords.GetRelatedRecordsHeader')
+      def self.X_external
+        @@X_external
+      end
     end
 
     class DelinkRecordsParam
@@ -228,6 +242,20 @@ module RelatedRecords
       @@If_modified_since = Header.new('If-Modified-Since', 'com.zoho.crm.api.RelatedRecords.GetRelatedRecordHeader')
       def self.If_modified_since
         @@If_modified_since
+      end
+    end
+
+    class UpdateRelatedRecordHeader
+      @@X_external = Header.new('X-EXTERNAL', 'com.zoho.crm.api.RelatedRecords.UpdateRelatedRecordHeader')
+      def self.X_external
+        @@X_external
+      end
+    end
+
+    class DelinkRecordHeader
+      @@X_external = Header.new('X-EXTERNAL', 'com.zoho.crm.api.RelatedRecords.DelinkRecordHeader')
+      def self.X_external
+        @@X_external
       end
     end
 

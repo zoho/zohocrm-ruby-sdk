@@ -29,10 +29,22 @@ module Util
     @@get_modified_modules = false
 
     @@force_refresh = false
+
+    @@module_api_name = nil
     def self.api_supported_module
       @@api_supported_module
     end
+    def self.verify_photo_support(module_api_name)
+    end
     def self.get_fields(module_api_name)
+      @@sync_lock.synchronize do
+        begin
+          @@module_api_name = module_api_name
+          get_fields_info(@@module_api_name)
+        end
+      end
+    end
+    def self.get_fields_info(module_api_name)
       require_relative '../initializer'
       initializer = Initializer.get_initializer
       record_field_details_path = nil
@@ -189,7 +201,7 @@ module Util
         f.write(record_field_details_json.to_json)
       end
       modified_modules.each_key do |module_api_name|
-        get_fields(module_api_name)
+        get_fields_info(module_api_name)
       end
     end
 
@@ -306,7 +318,11 @@ module Util
             error_response[Constants::STATUS] = data_object.status.value
             error_response[Constants::MESSAGE] = data_object.message.value
             error_response[Constants::DETAILS] = data_object.details
-            raise SDKException.new(Constants::API_EXCEPTION, nil, error_response)
+            exception = SDKException.new(Constants::API_EXCEPTION, nil, error_response)
+            if @@module_api_name.downcase == module_api_name.downcase
+              raise exception
+            end
+            SDKLog::SDKLogger.severe(Constants::API_EXCEPTION,exception)
           end
         else
           error_response = {}
@@ -557,7 +573,7 @@ module Util
         end
         field_detail[Constants::LOOKUP] = true
       end
-      get_fields(module_name) if !module_name.nil? && !module_name.empty?
+      get_fields_info(module_name) if !module_name.nil? && !module_name.empty?
       field_detail[Constants::NAME] = key_name
     end
 
@@ -609,7 +625,7 @@ module Util
 
           if related_list_jo[Constants::MODULE] != Constants::NULL_VALUE
             common_api_handler.module_api_name = related_list_jo[Constants::MODULE]
-            get_fields(related_list_jo[Constants::MODULE])
+            get_fields_info(related_list_jo[Constants::MODULE])
           end
           return true
         end
@@ -660,7 +676,7 @@ module Util
 
     def self.refresh_modules
       @@force_refresh = true
-      get_fields(nil)
+      get_fields_info(nil)
       @@force_refresh = false
     end
 

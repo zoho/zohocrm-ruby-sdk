@@ -71,7 +71,6 @@ module Util
       http.write_timeout = initializer.sdk_config.write_timeout
       http.keep_alive_timeout = initializer.sdk_config.keep_alive_timeout
 
-
       if @request_method == Constants::REQUEST_METHOD_GET
         req = Net::HTTP::Get.new(url.request_uri)
       elsif @request_method == Constants::REQUEST_METHOD_POST

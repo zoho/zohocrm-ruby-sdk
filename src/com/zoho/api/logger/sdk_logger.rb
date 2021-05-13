@@ -49,8 +49,7 @@ module SDKLog
       @@logger&.warn(Time.new.to_s + ' ' + message)
     end
 
-    def self.severe(message, exception = nil)     
-
+    def self.severe(message, exception = nil)
       message = message + exception.to_s + exception.backtrace.join("\n") unless exception.nil?
       @@logger&.fatal(Time.new.to_s + ' ' + message)
     end
@@ -66,5 +65,4 @@ module Levels
   ALL = 'ALL'
   OFF = 'OFF'
   FATAL = 'FATAL'
-
 end

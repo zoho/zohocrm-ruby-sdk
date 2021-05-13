@@ -100,7 +100,7 @@ class Constants
 
   ZOHO_SDK = 'X-ZOHO-SDK'
 
-  SDK_VERSION = '2.0.0'
+  SDK_VERSION = '2.1.0'
 
   SET_TO_CONTENT_TYPE = ['/crm/bulk/v2/read', '/crm/bulk/v2/write']
 
@@ -115,7 +115,6 @@ class Constants
   API_VERSION = "v2"
 
   PHOTO_SUPPORTED_MODULES = ["leads", "contacts", "accounts", "products", "vendors"]
-
 
   PARAMETER_NULL_ERROR = 'NULL PARAMETER ERROR'
 
@@ -234,7 +233,6 @@ class Constants
   PHOTO_UPLOAD_ERROR_MESSAGE  = "The given module is not supported in API.";
     
   INVALID_MODULE  = "INVALID_MODULE"
-
 
   INVENTORY_MODULES = %w[invoices sales_orders purchase_orders quotes]
 
@@ -509,7 +507,6 @@ class Constants
   INITIALIZATION_EXCEPTION = 'Exception in initialization'
 
   SWITCH_USER_ERROR = "SWITCH USER ERROR"
-
 
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
