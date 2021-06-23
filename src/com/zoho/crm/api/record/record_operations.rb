@@ -56,9 +56,10 @@ module Record
       # @param id [Integer] A Integer
       # @param module_api_name [String] A String
       # @param request [BodyWrapper] An instance of BodyWrapper
+      # @param header_instance [HeaderMap] An instance of HeaderMap
       # @return An instance of APIResponse
     # @raise SDKException
-    def update_record(id, module_api_name, request)
+    def update_record(id, module_api_name, request, header_instance=nil)
       if !id.is_a? Integer
         raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: id EXPECTED TYPE: Integer', nil, nil)
       end
@@ -67,6 +68,9 @@ module Record
       end
       if request!=nil and !request.is_a? BodyWrapper
         raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: request EXPECTED TYPE: BodyWrapper', nil, nil)
+      end
+      if header_instance!=nil and !header_instance.is_a? HeaderMap
+        raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: header_instance EXPECTED TYPE: HeaderMap', nil, nil)
       end
       handler_instance = Handler::CommonAPIHandler.new
       api_path = ''
@@ -79,6 +83,7 @@ module Record
       handler_instance.category_method = 'UPDATE'
       handler_instance.content_type = 'application/json'
       handler_instance.request = request
+      handler_instance.header = header_instance
       Util::Utility.get_fields(module_api_name)
       handler_instance.module_api_name = module_api_name
       require_relative 'action_handler'
@@ -89,9 +94,10 @@ module Record
       # @param id [Integer] A Integer
       # @param module_api_name [String] A String
       # @param param_instance [ParameterMap] An instance of ParameterMap
+      # @param header_instance [HeaderMap] An instance of HeaderMap
       # @return An instance of APIResponse
     # @raise SDKException
-    def delete_record(id, module_api_name, param_instance=nil)
+    def delete_record(id, module_api_name, param_instance=nil, header_instance=nil)
       if !id.is_a? Integer
         raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: id EXPECTED TYPE: Integer', nil, nil)
       end
@@ -100,6 +106,9 @@ module Record
       end
       if param_instance!=nil and !param_instance.is_a? ParameterMap
         raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: param_instance EXPECTED TYPE: ParameterMap', nil, nil)
+      end
+      if header_instance!=nil and !header_instance.is_a? HeaderMap
+        raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: header_instance EXPECTED TYPE: HeaderMap', nil, nil)
       end
       handler_instance = Handler::CommonAPIHandler.new
       api_path = ''
@@ -111,6 +120,7 @@ module Record
       handler_instance.http_method = Constants::REQUEST_METHOD_DELETE
       handler_instance.category_method = Constants::REQUEST_METHOD_DELETE
       handler_instance.param = param_instance
+      handler_instance.header = header_instance
       require_relative 'action_handler'
       handler_instance.api_call(ActionHandler.name, 'application/json')
     end
@@ -177,14 +187,18 @@ module Record
       # The method to update records
       # @param module_api_name [String] A String
       # @param request [BodyWrapper] An instance of BodyWrapper
+      # @param header_instance [HeaderMap] An instance of HeaderMap
       # @return An instance of APIResponse
     # @raise SDKException
-    def update_records(module_api_name, request)
+    def update_records(module_api_name, request, header_instance=nil)
       if !module_api_name.is_a? String
         raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: module_api_name EXPECTED TYPE: String', nil, nil)
       end
       if request!=nil and !request.is_a? BodyWrapper
         raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: request EXPECTED TYPE: BodyWrapper', nil, nil)
+      end
+      if header_instance!=nil and !header_instance.is_a? HeaderMap
+        raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: header_instance EXPECTED TYPE: HeaderMap', nil, nil)
       end
       handler_instance = Handler::CommonAPIHandler.new
       api_path = ''
@@ -196,6 +210,7 @@ module Record
       handler_instance.content_type = 'application/json'
       handler_instance.request = request
       handler_instance.mandatory_checker = true
+      handler_instance.header = header_instance
       Util::Utility.get_fields(module_api_name)
       handler_instance.module_api_name = module_api_name
       require_relative 'action_handler'
@@ -205,14 +220,18 @@ module Record
       # The method to delete records
       # @param module_api_name [String] A String
       # @param param_instance [ParameterMap] An instance of ParameterMap
+      # @param header_instance [HeaderMap] An instance of HeaderMap
       # @return An instance of APIResponse
     # @raise SDKException
-    def delete_records(module_api_name, param_instance=nil)
+    def delete_records(module_api_name, param_instance=nil, header_instance=nil)
       if !module_api_name.is_a? String
         raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: module_api_name EXPECTED TYPE: String', nil, nil)
       end
       if param_instance!=nil and !param_instance.is_a? ParameterMap
         raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: param_instance EXPECTED TYPE: ParameterMap', nil, nil)
+      end
+      if header_instance!=nil and !header_instance.is_a? HeaderMap
+        raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: header_instance EXPECTED TYPE: HeaderMap', nil, nil)
       end
       handler_instance = Handler::CommonAPIHandler.new
       api_path = ''
@@ -222,6 +241,7 @@ module Record
       handler_instance.http_method = Constants::REQUEST_METHOD_DELETE
       handler_instance.category_method = Constants::REQUEST_METHOD_DELETE
       handler_instance.param = param_instance
+      handler_instance.header = header_instance
       require_relative 'action_handler'
       handler_instance.api_call(ActionHandler.name, 'application/json')
     end
@@ -229,14 +249,18 @@ module Record
       # The method to upsert records
       # @param module_api_name [String] A String
       # @param request [BodyWrapper] An instance of BodyWrapper
+      # @param header_instance [HeaderMap] An instance of HeaderMap
       # @return An instance of APIResponse
     # @raise SDKException
-    def upsert_records(module_api_name, request)
+    def upsert_records(module_api_name, request, header_instance=nil)
       if !module_api_name.is_a? String
         raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: module_api_name EXPECTED TYPE: String', nil, nil)
       end
       if request!=nil and !request.is_a? BodyWrapper
         raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: request EXPECTED TYPE: BodyWrapper', nil, nil)
+      end
+      if header_instance!=nil and !header_instance.is_a? HeaderMap
+        raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: header_instance EXPECTED TYPE: HeaderMap', nil, nil)
       end
       handler_instance = Handler::CommonAPIHandler.new
       api_path = ''
@@ -248,6 +272,7 @@ module Record
       handler_instance.category_method = 'ACTION'
       handler_instance.content_type = 'application/json'
       handler_instance.request = request
+      handler_instance.header = header_instance
       Util::Utility.get_fields(module_api_name)
       handler_instance.module_api_name = module_api_name
       require_relative 'action_handler'
@@ -287,14 +312,18 @@ module Record
       # The method to search records
       # @param module_api_name [String] A String
       # @param param_instance [ParameterMap] An instance of ParameterMap
+      # @param header_instance [HeaderMap] An instance of HeaderMap
       # @return An instance of APIResponse
     # @raise SDKException
-    def search_records(module_api_name, param_instance=nil)
+    def search_records(module_api_name, param_instance=nil, header_instance=nil)
       if !module_api_name.is_a? String
         raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: module_api_name EXPECTED TYPE: String', nil, nil)
       end
       if param_instance!=nil and !param_instance.is_a? ParameterMap
         raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: param_instance EXPECTED TYPE: ParameterMap', nil, nil)
+      end
+      if header_instance!=nil and !header_instance.is_a? HeaderMap
+        raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: header_instance EXPECTED TYPE: HeaderMap', nil, nil)
       end
       handler_instance = Handler::CommonAPIHandler.new
       api_path = ''
@@ -305,6 +334,7 @@ module Record
       handler_instance.http_method = Constants::REQUEST_METHOD_GET
       handler_instance.category_method = 'READ'
       handler_instance.param = param_instance
+      handler_instance.header = header_instance
       Util::Utility.get_fields(module_api_name)
       handler_instance.module_api_name = module_api_name
       require_relative 'response_handler'
@@ -394,7 +424,7 @@ module Record
       handler_instance.content_type = 'multipart/form-data'
       handler_instance.request = request
       handler_instance.mandatory_checker = true
-      Util::Utility.get_modules()
+      Util::Utility.verify_photo_support(module_api_name)
       require_relative 'file_handler'
       handler_instance.api_call(FileHandler.name, 'application/json')
     end
@@ -523,12 +553,30 @@ module Record
       def self.If_modified_since
         @@If_modified_since
       end
+      @@X_external = Header.new('X-EXTERNAL', 'com.zoho.crm.api.Record.GetRecordHeader')
+      def self.X_external
+        @@X_external
+      end
+    end
+
+    class UpdateRecordHeader
+      @@X_external = Header.new('X-EXTERNAL', 'com.zoho.crm.api.Record.UpdateRecordHeader')
+      def self.X_external
+        @@X_external
+      end
     end
 
     class DeleteRecordParam
       @@wf_trigger = Param.new('wf_trigger', 'com.zoho.crm.api.Record.DeleteRecordParam')
       def self.wf_trigger
         @@wf_trigger
+      end
+    end
+
+    class DeleteRecordHeader
+      @@X_external = Header.new('X-EXTERNAL', 'com.zoho.crm.api.Record.DeleteRecordHeader')
+      def self.X_external
+        @@X_external
       end
     end
 
@@ -596,6 +644,17 @@ module Record
       def self.If_modified_since
         @@If_modified_since
       end
+      @@X_external = Header.new('X-EXTERNAL', 'com.zoho.crm.api.Record.GetRecordsHeader')
+      def self.X_external
+        @@X_external
+      end
+    end
+
+    class UpdateRecordsHeader
+      @@X_external = Header.new('X-EXTERNAL', 'com.zoho.crm.api.Record.UpdateRecordsHeader')
+      def self.X_external
+        @@X_external
+      end
     end
 
     class DeleteRecordsParam
@@ -606,6 +665,20 @@ module Record
       @@wf_trigger = Param.new('wf_trigger', 'com.zoho.crm.api.Record.DeleteRecordsParam')
       def self.wf_trigger
         @@wf_trigger
+      end
+    end
+
+    class DeleteRecordsHeader
+      @@X_external = Header.new('X-EXTERNAL', 'com.zoho.crm.api.Record.DeleteRecordsHeader')
+      def self.X_external
+        @@X_external
+      end
+    end
+
+    class UpsertRecordsHeader
+      @@X_external = Header.new('X-EXTERNAL', 'com.zoho.crm.api.Record.UpsertRecordsHeader')
+      def self.X_external
+        @@X_external
       end
     end
 
@@ -663,6 +736,13 @@ module Record
       @@per_page = Param.new('per_page', 'com.zoho.crm.api.Record.SearchRecordsParam')
       def self.per_page
         @@per_page
+      end
+    end
+
+    class SearchRecordsHeader
+      @@X_external = Header.new('X-EXTERNAL', 'com.zoho.crm.api.Record.SearchRecordsHeader')
+      def self.X_external
+        @@X_external
       end
     end
 
